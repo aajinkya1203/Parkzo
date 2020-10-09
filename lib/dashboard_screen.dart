@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -12,43 +13,42 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         title: Text("Parking")
       ),
-      body: ListView(
-      children: const <Widget>[
-        Card(
-          child: ListTile(
-            leading: FlutterLogo(),
-            title: Text('Slot 1'),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: FlutterLogo(),
-            title: Text('Slot 2'),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: FlutterLogo(),
-            title: Text('Slot 3'),
-          ),
-        ),
-        SizedBox(height: 50.0),
-        Card(
-          child: ListTile(
-            leading: FlutterLogo(),
-            title: Text('Total Slots'),
-            subtitle: Text('5'),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: FlutterLogo(),
-            title: Text('Available Slots'),
-            subtitle: Text('2'),
-          ),
-        ),
-      ],
-    ),
+      body: StreamBuilder(
+        stream: Firestore.instance.collection('cars').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if(!snapshot.hasData){
+            return Center(child: CircularProgressIndicator());
+          }
+          List<DocumentSnapshot> docs = snapshot.data.documents;
+          print("DOcs ${docs[3]['Status']}");
+          return ListView.builder(
+            itemCount: docs.length,
+            itemBuilder: (context, data){
+              print("Data $data");
+              if(docs[data]['Status'] == 1){
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                  child: ListTile(
+                      leading: Image(image: AssetImage('assets/redCar.png')),
+                      title: Text('Slot $data'),
+                    ),
+                  ),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                child: ListTile(
+                    leading: Image(image: AssetImage('assets/greenCar-.png')),
+                    title: Text('Slot $data'),
+                  ),
+                ),
+              );
+            }
+          );
+        }
+      ),
     );
   }
 }
