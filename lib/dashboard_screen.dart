@@ -31,7 +31,7 @@ class _DashboardState extends State<Dashboard> {
                   child: Card(
                   child: ListTile(
                       leading: Image(image: AssetImage('assets/redCar.png')),
-                      title: Text('Slot $data'),
+                      title: Text('Slot ${data+1}'),
                     ),
                   ),
                 );
@@ -41,13 +41,18 @@ class _DashboardState extends State<Dashboard> {
                 child: Card(
                 child: ListTile(
                     leading: Image(image: AssetImage('assets/greenCar-.png')),
-                    title: Text('Slot $data'),
+                    title: Text('Slot ${data+1}'),
                   ),
                 ),
               );
             }
           );
         }
+      ),
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Total Slots",
+        onPressed: () {},
+        child: Text("4"),
       ),
     );
   }

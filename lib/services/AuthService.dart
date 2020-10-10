@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class AuthService {
@@ -10,6 +11,27 @@ class AuthService {
     return _auth.onAuthStateChanged;
   }
 
+  Future addLPN(String e) async {
+    try{
+      final FirebaseUser user = await _auth.currentUser();
+      final uid = user.uid;
+      bool data = await Firestore.instance.collection('Car Number').add({
+        "LPN": e,
+        "user": uid
+      }).then((value){
+        print(value.documentID);
+        return true;
+      });
+      if(data){
+        return true;
+      }else{
+        return false;
+      }
+    }catch(e){
+      print("Caught error during adding LPN: $e");
+      return false;
+    }
+  }
 
   //registering with email and pass
   Future registerWithEmailAndPass(String e, String p) async {
