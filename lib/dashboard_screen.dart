@@ -35,14 +35,29 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ),
                 );
+              } else if(docs[data]['Status'] == 2){
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                  child: ListTile(
+                      leading: Image(image: AssetImage('assets/blueCar.png')),
+                      title: Text('Slot ${data+1}'),
+                    ),
+                  ),
+                );
               }
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
-                child: ListTile(
-                    leading: Image(image: AssetImage('assets/greenCar-.png')),
-                    title: Text('Slot ${data+1}'),
-                  ),
+                child: InkWell(
+                  onTap: () async{
+                    await Firestore.instance.collection('cars').document("Car ${data+1}").updateData({"Status": 2});
+                  },
+                    child: ListTile(
+                      leading: Image(image: AssetImage('assets/greenCar-.png')),
+                      title: Text('Slot ${data+1}'),
+                    ),
+                ),
                 ),
               );
             }
