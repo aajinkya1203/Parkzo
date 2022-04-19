@@ -1,15 +1,16 @@
-# Parkzo
+# parking
 
-An IOT project that takes care of the Parking system in any mall. 
+A new Flutter project.
 
-__Note: This is not a UI intensive app, but functionality intensive app!__
+## Getting Started
 
-## Basic Idea
----
-- Green Spots on the app suggest available slots, whenever a user books that spot it is marked blue on the Firebase and accordingly on the app.
-- Once a car comes to the respective slot, the Ultrasonic sensor senses the car (with the reduced change in distance) and accordingly that spot it now taken and it shown red!
+This project is a starting point for a Flutter application.
 
-## Collaborators
-- [Aajinkya Singh]('http://github.com/aajinkya1203)
-- [Ritvik Sardana]('https://github.com/ritviksardana)
+A few resources to get you started if this is your first Flutter project:
 
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
